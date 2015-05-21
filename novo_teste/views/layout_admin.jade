@@ -1,0 +1,22 @@
+include layout.jade
+div.navbar.navbar-inverse.navbar-fixed-top
+  div.navbar-inner
+    div.container
+      button.btn.btn-navbar
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a(href="/admin" class="brand") Administration
+      div.nav-collapse.collapse
+        ul.nav
+          li
+            a(href="/admin/painel") Painel
+          li
+            a(href="/admin/terms") Terms
+          li
+            a(href="/admin/painel") Users
+div.container
+  block content_admin
+
+
+div.footer

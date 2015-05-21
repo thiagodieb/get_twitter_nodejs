@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap-responsive.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+    script(src='/bootstrap/js/bootstrap.min.js')    
+    script(type='text/javascript', src="http://localhost:3100/socket.io/socket.io.js")
+    script(type='text/javascript', src='/javascripts/client.js')
+    script(type='text/javascript', src='/javascripts/script.js')
+  body(id=dummybodyid)
+    block content

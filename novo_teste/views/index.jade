@@ -1,0 +1,18 @@
+extends layout
+block content
+  div.top
+    if username
+      h1 "#{username}" 
+    else
+      form.form-inline(method="post", id="loginForm", action="/login")
+        label Username
+        input.span3(id="username", type="text", name="User", placeholder="Enter your username")
+        label Password
+        input.span3(id="password", type="password", name="Password")
+        input.btn(type="submit", value="Log In")
+  if username
+    div.container
+      div.content
+        a(href="/admin") Listagem
+
+  div.footer

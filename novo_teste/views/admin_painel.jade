@@ -1,0 +1,24 @@
+extends layout_admin
+block content_admin
+  div.tabbable
+    ul.nav.nav-tabs
+      each val, index in terms
+        li: a(href="#"+val data-toggle="tab") #{val}
+    
+
+    div.tab-content
+      each val, index in terms
+        div(id="#{val}" class="tab-pane")
+          h1 Result of Twitter "#{val}" 
+          table.table.table-striped
+            thead
+              tr
+                th User
+                th Text
+                th Date
+            tbody
+              for item in twetts[val]
+                tr
+                  td= item.user
+                  td= item.text
+                  td= item.date
