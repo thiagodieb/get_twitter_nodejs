@@ -1,36 +1,70 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'start' ]
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'owner', 'ls', 'novo_teste' ]
 2 info using npm@2.5.1
 3 info using node@v0.12.0
 4 verbose node symlink /usr/local/bin/node
-5 verbose run-script [ 'prestart', 'start', 'poststart' ]
-6 info prestart novo_teste@0.0.0
-7 info start novo_teste@0.0.0
-8 verbose unsafe-perm in lifecycle true
-9 info novo_teste@0.0.0 Failed to exec start script
-10 verbose stack Error: novo_teste@0.0.0 start: `node ./bin/www`
-10 verbose stack Exit status 1
-10 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:213:16)
-10 verbose stack     at EventEmitter.emit (events.js:110:17)
-10 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:14:12)
-10 verbose stack     at ChildProcess.emit (events.js:110:17)
-10 verbose stack     at maybeClose (child_process.js:1008:16)
-10 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1080:5)
-11 verbose pkgid novo_teste@0.0.0
-12 verbose cwd /Users/dieb/Dropbox/Sites/frella/twitter_nodejs/novo_teste
-13 error Darwin 14.1.0
-14 error argv "node" "/usr/local/bin/npm" "start"
-15 error node v0.12.0
-16 error npm  v2.5.1
-17 error code ELIFECYCLE
-18 error novo_teste@0.0.0 start: `node ./bin/www`
-18 error Exit status 1
-19 error Failed at the novo_teste@0.0.0 start script 'node ./bin/www'.
-19 error This is most likely a problem with the novo_teste package,
-19 error not with npm itself.
-19 error Tell the author that this fails on your system:
-19 error     node ./bin/www
-19 error You can get their info via:
-19 error     npm owner ls novo_teste
-19 error There is likely additional logging output above.
-20 verbose exit [ 1, true ]
+5 silly mapToRegistry name novo_teste
+6 silly mapToRegistry using default registry
+7 silly mapToRegistry registry https://registry.npmjs.org/
+8 silly mapToRegistry uri https://registry.npmjs.org/novo_teste
+9 verbose request uri https://registry.npmjs.org/novo_teste
+10 verbose request no auth needed
+11 info attempt registry request try #1 at 23:07:38
+12 verbose request id 53bb3a77f5006b66
+13 http request GET https://registry.npmjs.org/novo_teste
+14 http 404 https://registry.npmjs.org/novo_teste
+15 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+15 verbose headers   'content-type': 'application/json',
+15 verbose headers   'cache-control': 'max-age=0',
+15 verbose headers   'content-length': '51',
+15 verbose headers   'accept-ranges': 'bytes',
+15 verbose headers   date: 'Tue, 26 May 2015 02:07:39 GMT',
+15 verbose headers   via: '1.1 varnish',
+15 verbose headers   age: '0',
+15 verbose headers   connection: 'keep-alive',
+15 verbose headers   'x-served-by': 'cache-jfk1021-JFK',
+15 verbose headers   'x-cache': 'MISS',
+15 verbose headers   'x-cache-hits': '0',
+15 verbose headers   'x-timer': 'S1432606059.187628,VS0,VE22' }
+16 silly get cb [ 404,
+16 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+16 silly get     'content-type': 'application/json',
+16 silly get     'cache-control': 'max-age=0',
+16 silly get     'content-length': '51',
+16 silly get     'accept-ranges': 'bytes',
+16 silly get     date: 'Tue, 26 May 2015 02:07:39 GMT',
+16 silly get     via: '1.1 varnish',
+16 silly get     age: '0',
+16 silly get     connection: 'keep-alive',
+16 silly get     'x-served-by': 'cache-jfk1021-JFK',
+16 silly get     'x-cache': 'MISS',
+16 silly get     'x-cache-hits': '0',
+16 silly get     'x-timer': 'S1432606059.187628,VS0,VE22' } ]
+17 error owner ls Couldn't get owner data novo_teste
+18 verbose stack Error: 404 Not Found: novo_teste
+18 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:251:14)
+18 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:178:14)
+18 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:344:22)
+18 verbose stack     at Request.emit (events.js:110:17)
+18 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1239:14)
+18 verbose stack     at Request.emit (events.js:129:20)
+18 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1187:12)
+18 verbose stack     at IncomingMessage.emit (events.js:129:20)
+18 verbose stack     at _stream_readable.js:908:16
+18 verbose stack     at process._tickCallback (node.js:355:11)
+19 verbose statusCode 404
+20 verbose pkgid novo_teste
+21 verbose cwd /Users/dieb/Dropbox/Sites/frella/twitter_nodejs/novo_teste
+22 error Darwin 14.1.0
+23 error argv "node" "/usr/local/bin/npm" "owner" "ls" "novo_teste"
+24 error node v0.12.0
+25 error npm  v2.5.1
+26 error code E404
+27 error 404 Not Found: novo_teste
+27 error 404
+27 error 404 'novo_teste' is not in the npm registry.
+27 error 404 You should bug the author to publish it (or use the name yourself!)
+27 error 404
+27 error 404 Note that you can also install from a
+27 error 404 tarball, folder, http url, or git url.
+28 verbose exit [ 1, true ]
