@@ -1,0 +1,27 @@
+extends layout_admin
+block content_admin
+  div.tab-content
+    div.tab-pane
+      table.table.table-striped
+        thead
+          tr
+            th Action
+            th Term
+            th Status
+        tbody
+          for item in tracks
+            tr
+              td
+                a.click_action(value="#{item._id}") - edit 
+                a.click_action(value="#{item._id}") - delete
+              td= item.term
+              td= item.status
+
+  form.form-horizontal(method="post", id="loginForm", action="/login")
+    fieldset
+      legenda New Term
+      label Term name
+      input.span3(id="term", type="text", name="term", placeholder="Enter term name")
+      label.checkbox
+        input(type='checkbox' value="true")
+      button.btn(type="submit", value="Submit")
