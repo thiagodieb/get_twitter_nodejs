@@ -16,5 +16,9 @@
     "mongoose": "latest",
     "express-session": "latest",
     "socket.io": "latest"
-  }
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }

@@ -1,6 +1,9 @@
 var connection = require('./connection');
 
-var tweet = new connection.Schema({  
+var Schema = connection.Schema, ObjectId = Schema.ObjectId;
+
+var tweet = new Schema({   
+  _id: ObjectId,
   created_at: { type: Date, default: Date.now },
   id: Number,
   id_str: Number,

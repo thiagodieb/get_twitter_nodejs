@@ -10,8 +10,10 @@ var twitte_tools = require('../tools/twitte_tools');
 router.use(function(req, res, next) {
 	session.check_session(req,res,function(){
 		console.log(' ***** %s %s %s', req.method, req.url, req.path);
-		twitte_tools.get_terms(function(tracks){
+ 		twitte_tools.get_terms(function(tracks){
 			if(tracks != undefined ){
+				var term = {_id:"",term:"",status:""}
+				res.locals.term = term;
 				res.locals.tracks = tracks;
 				next();
 			}
@@ -21,51 +23,63 @@ router.use(function(req, res, next) {
 
 /* GET terms */
 router.get('/', function(req, res, next) {
-	var term = {_id:"",name:"",status:""}
-	res.locals.term = term;
 	res.render('admin_terms');
 }); 
 
 /* GET terms */
 router.get('/edit/:id', function(req, res, next) {
- 		track.findOne({ _id: req.params.id }, function(err, term) {
+	if(req.params.id){
+		track.findById(req.params.id, function(err, term) {
 		    if (err) {
-		      return res.send(err);
-		    }
-	    	res.locals.term = term._doc;
-			res.render('admin_terms');
+				console.log(err.message);
+		    }else if(term !=undefined && term._doc != undefined){
+		    	res.locals.term = term._doc;
+				res.render('admin_terms');
+			}else{
+				res.redirect("..");
+			}
 		});
+	}
+}); 
+/* GET terms */
+router.get('/delete/:id', function(req, res, next) {
+	if(req.params.id != undefined){
+		track.findOneAndRemove(req.params.id,function(err, term) {
+		    if (err) {
+	 			console.log(err);
+		    }else{
+		    	res.redirect("..");	
+		    } 		    
+		});
+	}
+}); 
+/* GET terms */
+router.post('/save', function(req, res, next) {
+	req.body.status = req.body.status != undefined ? true :false;
+ 	if(req.body._id){
+  		track.findById(req.body._id).update(req.body,function(err,raw) {
+ 			if(err){
+ 				console.log(err);
+ 			}else{
+			    res.locals.msg = "Registro alterado com sucesso !";
+				//res.send({redirect: '/admin/terms'});
+			    res.redirect(".");
+				//res.render('admin_terms');
+			}
+		});
+	}else{
+ 		var term = new track(req.body);
+		term.save(function(err) {
+			if (err) {
+			  	console.log(err);
+			}else{
+				res.locals.msg = "Registro salvo com sucesso !";
+				res.redirect(".");
+			}
+		});
+	}
 }); 
 
-/* GET terms */ 
-router.post('/edit/:id', function(req, res, next) {
-
-
-	Users.findOne({ _id: req.params.id }, function(err, user) {
-    if (err) {
-      return res.send(err);
-    }
- 
-    for (prop in req.body) {
-      user[prop] = req.body[prop];
-    }
- 
-    // save the movie
-    user.save(function(err) {
-      if (err) {
-        return res.send(err);
-      }
- 
-
-
- 		track.findOne({ _id: req.params.id }, function(err, term) {
-		    if (err) {
-		      return res.send(err);
-		    }
-
- 		  
-		});
-}); 
 	
 
 module.exports = router;

@@ -7,12 +7,14 @@ jQuery(document).ready(function(){
 	jQuery("a.action").click(function(){
 		var type = jQuery("table.table").attr("id");
 		var value = jQuery(this).attr("value");
+		console.log(value);
 		var action 
 		if(jQuery(this).hasClass("click_edit")){
 			action = '/admin/'+type+'/edit/'+value;
 		}else if(jQuery(this).hasClass("click_remove")){
-			action = '/admin/'+type+'/remove/id/'+value;
+			action = '/admin/'+type+'/delete/'+value;
 		}
+		console.log(action);
 		if(undefined != action) window.location.href = action;
 	});
 

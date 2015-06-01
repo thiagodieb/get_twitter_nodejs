@@ -11,10 +11,13 @@ session.check_session = function (req,res,callback){
 }
 
 session.create_session = function(body,callback){
-	user.findOne({"user":body.User}).exec(function (err, items) {
-		if(items != null && items.checkPassword(body.User,body.Password)){
-			callback(items._doc);
+	
+	user.findOne({"user":body.User,"status":true}).exec(function (err, item) {
+		var u;
+		if(item != null && item.checkPassword(body.User,body.Password)){
+			u = item._doc;
 		}
+		callback(u);
 	});
 }
 	 

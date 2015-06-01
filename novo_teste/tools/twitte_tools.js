@@ -34,7 +34,6 @@ twitte_tools.result_twitter = function (tracks,callback){
 		.select('timestamp_ms text user retweet_count terms')
 		.sort('-timestamp_ms')
 		.where('terms').in(tracks)
-		.limit(15)
 		.exec(function (err, items) {
 			//console.log(items);
 

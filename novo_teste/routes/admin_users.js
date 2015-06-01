@@ -4,76 +4,88 @@ var router = express.Router();
 var session = require('../tools/session');
 var user = require('../models/user');
 
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
+/* CheckSession All */
+router.use(function(req, res, next) {
   session.check_session(req,res,function(){
+    console.log(' ***** %s %s %s', req.method, req.url, req.path);
     user.find(function(err, users) {
       if (err) {
-        return res.send(err);
+        console.log(err)
+        res.send(err);
+      }else if(users != undefined ){
+        res.locals.user = {_id:"",user:"",name:"",email:"",pass:"",status:""};
+        res.locals.users = users;
+        next();
       }
-      res.render('admin_users');
     });
   });
-  //res.send('respond with a resource');
-});
- 
-
-router.route('/user').post(function(req, res) {
-  var user = new Users(req.body);
- 
-  user.save(function(err) {
-    if (err) {
-      return res.send(err);
-    }
- 
-    res.send({ message: 'User Added' });
-  });
 });
 
+/* GET users */
+router.get('/', function(req, res, next) {
+  res.render('admin_users');
+}); 
 
-router.route('/user/:id').put(function(req,res){
-  Users.findOne({ _id: req.params.id }, function(err, user) {
-    if (err) {
-      return res.send(err);
-    }
- 
-    for (prop in req.body) {
-      user[prop] = req.body[prop];
-    }
- 
-    // save the movie
-    user.save(function(err) {
+/* GET user */
+router.get('/edit/:id', function(req, res, next) {
+  if(req.params.id){
+    user.findById(req.params.id, function(err, u) {
+        if (err) {
+          console.log(err.message);
+        }else if(u !=undefined && u._doc != undefined){
+          res.locals.user = u._doc;
+          res.locals.user.pass = "";
+        res.render('admin_users');
+      }else{
+        res.redirect("..");
+      }
+    });
+  }
+}); 
+
+/* GET user */
+router.get('/delete/:id', function(req, res, next) {
+  if(req.params.id != undefined){
+    user.findOneAndRemove(req.params.id,function(err, u) {
+        if (err) {
+          console.log(err);
+        }else{
+          res.redirect(".."); 
+        }         
+    });
+  }
+}); 
+
+/* GET user */
+router.post('/save', function(req, res, next) {
+  req.body.status = req.body.status != undefined ? true :false;
+  if(req.body._id){
+      if(req.body.pass != ""){
+        u = new user();
+        req.body.pass = u.createPassword(req.body.user,req.body.pass);
+      }else{
+        delete req.body.pass;
+      }
+      user.findById(req.body._id).update(req.body,function(err,raw) {
+        if(err){
+          console.log(err);
+        }else{
+          res.locals.msg = "Registro alterado com sucesso !";
+          res.redirect(".");
+        }
+      });
+  }else{
+    var u = new user(req.body);
+    u.save(function(err) {
       if (err) {
-        return res.send(err);
+          console.log(err);
+      }else{
+        res.locals.msg = "Registro salvo com sucesso !";
+        res.redirect(".");
       }
- 
-      res.json({ message: 'User updated!' });
     });
-  });
-});
-
-router.route('/user/:id').get(function(req, res) {
-  Users.findOne({ _id: req.params.id}, function(err, user) {
-    if (err) {
-      return res.send(err);
-    }
- 
-    res.json(movie);
-  });
-});
-
-router.route('/user/:id').delete(function(req, res) {
-  Users.remove({
-    _id: req.params.id
-  }, function(err, movie) {
-    if (err) {
-      return res.send(err);
-    }
- 
-    res.json({ message: 'Successfully deleted' });
-  });
-});
+  }
+}); 
 
 
 module.exports = router;

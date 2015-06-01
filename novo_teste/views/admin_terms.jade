@@ -1,19 +1,23 @@
 extends layout_admin
 block content_admin
+  h3 Terms
+  hr
   div.tab-content
     div
-      form.form-horizontal(method="post", id="loginForm", action="/login")
-        fieldset 
-          legend Terms
+      form.form-horizontal(method="post", id="loginForm" action="/admin/terms/save")
+        if msg
+          div.alert.alert-info
+            button(class="close" data-dismiss="alert") &times;
+            a(class="display_tweets") #{msg}
         div.control-group
           label.control-label Term name
           div.controls  
             input.span3(id="term", type="text", name="term", placeholder="Enter term name" value="#{term.term}")
-            input(type="hidden" id="id" name="id" value="#{term._id}")
+            input(type="hidden" id="_id" name="_id" value="#{term._id}")
         div.control-group
           label.control-label Status
           div.controls  
-              input(type="checkbox" value="#{term.status}")
+              input(type="checkbox" name="status" id="status" checked=(term.status==true ? "checked" : undefined) )
         div.control-group
           div.controls         
             button.btn(type="submit", value="Submit") Submit
@@ -31,8 +35,8 @@ block content_admin
               td
                 a.action.click_edit(value="#{item._id}")
                   i.icon-pencil
-                a.action.click_remove(value="#{item._id}" class="hide")
-                a.action(href="#modal" role="button" data-toggle="modal")
+                a.action(value="#{item._id}" class="hide click_remove")
+                a.action(href="#modal" role="button" data-toggle="modal" value="#{item._id}")
                   i.icon-remove
               td= item.term
               td= item.status
