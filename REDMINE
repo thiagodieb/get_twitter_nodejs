@@ -1,0 +1,34 @@
+#Database
+
+- install database
+
+- script database
+
+#use DATABASE teste;
+#use teste;
+#db.createCollection('tracks');
+#db.tracks.insert({term:'STRING_DO_TERMO',status:true});
+#db.createCollection('documents');
+#db.createCollection('users');
+#db.users.insert({user:'admin',pass:'admin','Administrator',email:'admin@admin.com',status:true});
+
+
+
+#ENVORIMENT
+
+- install node
+- install npm
+
+- application configuration - Get Terms of Twiiter
+#npm install twitter
+#npm install socket.io-client
+#npm install mongodb
+
+- application configuration - Administration Terms
+#cd novo_teste
+#npm install
+#npm start
+open in browser localhost:3000
+
+ 
+-
