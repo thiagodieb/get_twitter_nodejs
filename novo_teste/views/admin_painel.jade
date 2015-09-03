@@ -1,4 +1,5 @@
 extends layout_admin
+
 block content_admin
   h3 Painel
   hr
@@ -18,9 +19,4 @@ block content_admin
                 th User
                 th Text
                 th Date
-            tbody
-              for item in twetts[val]
-                tr
-                  td= item.user
-                  td= item.text
-                  td= item.date
+            tbody 

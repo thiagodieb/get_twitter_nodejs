@@ -25,13 +25,24 @@ router.get('/painel', function(req, res, next) {
 		twitte_tools.get_terms(function(tracks){
 			if(tracks != undefined ){
 				return_.terms = tracks;
-				twitte_tools.result_twitter(tracks,function(result){
-					return_.twetts = result;
+				///twitte_tools.result_twitter(tracks,function(result){
+					//return_.twetts = result;
 			   		//console.log(return_);
-				 	res.render('admin_painel', return_);
-			   	}); 		
+				 	
+			   //	}); 		
 			}
+			res.render('admin_painel', return_);
 		});
 });
-	 
+
+
+router.get('/load/:term', function(req, res, next) {
+  	if(req.params.term != undefined && req.params.term != ""){
+  		twitte_tools.result_twitter(req.params.term,function(result){
+			//return_.twetts = result;
+			res.json(result);
+	   	});
+  	}
+}); 
+ 
 module.exports = router;
