@@ -38,9 +38,15 @@ https://docs.npmjs.com/cli/install
 > npm install twitter
 > npm install socket.io-client
 > npm install mongodb
+> npm install cheerio
 
 # application configuration - Administration Terms
 > cd novo_teste
 > npm install
 > npm start
 - open in browser localhost:3000
+
+
+***Rum background application ***
+> node twitter_get_info_user.js & node twitter_get_tweets.js
+
