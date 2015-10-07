@@ -81,7 +81,7 @@ function filterTerms(tracks,tweet){
 
   for(var i in terms ){
       term = terms[i];
-      if(term != "" 
+      if(term != ""
         && tweet.text != undefined
         && tweet.text.search(new RegExp(term, "i")) != -1){
         tweet.terms.push(term);
@@ -101,13 +101,13 @@ function executeStreaming(tracks,db){
         if(tweet != undefined){
             var collection = db.collection('documents');
             tweet = filterTerms(tracks,tweet);
- 
+
              collection.insert(tweet, function(err, result) {
               //console.log(result);
               assert.equal(err, null);
-              
+
               if(SocketConnection != null && tweet != undefined && tweet.user != undefined && tweet.user.name != undefined){
-                SocketConnection.emit("insert_twetts", {user: tweet.user.name, text: tweet.text, terms: tweet.terms, date:tweet.timestamp_ms});  
+                SocketConnection.emit("insert_twetts", {id:tweet.user.id, user: tweet.user.name, text: tweet.text, terms: tweet.terms, date:tweet.timestamp_ms});
               }
 
               console.log("****** Inserted *******");
@@ -123,7 +123,7 @@ function executeStreaming(tracks,db){
         console.log(error);
         db.close()
       });
-      
+
       streamStop = function (){
           stream.destroy();
       }

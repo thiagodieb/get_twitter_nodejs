@@ -23,9 +23,9 @@ twitte_tools.get_terms = function (callback,where,type){
 }
 
 twitte_tools.result_twitter = function (term,callback){
-	
+
 	console.log(term);
-	var result = new Array(); 
+	var result = new Array();
 	//for(index in tracks){
 	//	term = tracks[index];
 	//	result[term] = new Array();
@@ -35,7 +35,7 @@ twitte_tools.result_twitter = function (term,callback){
 			.sort('-timestamp_ms')
 			.where('terms').equals(term)
 			.exec(function (err, items) {
-				
+
 			  	if (err) return handleError(err);
 		  		for (var y in items) {
 					item = items[y]._doc;
@@ -44,8 +44,9 @@ twitte_tools.result_twitter = function (term,callback){
 							date:item.timestamp_ms,
 							text:item.text,
 							user:item.user.name,
+							id:item.user.id,
 							retweets:item.retweet_count,
-						}; 
+						};
 						result.push(twitter);/*
 						for(index in tracks){
 							if(item.terms.indexOf(tracks[index]))
@@ -56,7 +57,7 @@ twitte_tools.result_twitter = function (term,callback){
 				}
 
 				callback(result);
-		}); 
+		});
 	//}
 }
 

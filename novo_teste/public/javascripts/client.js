@@ -1,22 +1,36 @@
 jQuery(document).ready(function(){
-	
+
 	loadPageWithTweets();
 
-	var socket = io.connect("http://localhost:3100"); 
+	var socket = io.connect("http://localhost:3100");
 
 	socket.on('twetts', function (data) {
-		
+
 		jQuery(data.terms).each(function(i,n){
 			id = data.terms[i];
 			createAlert(id);
-			twett = '<tr class="hide"><td>'+data.user+'</td><td>'+data.text+'</td><td>'+data.date+'</td></tr>';
+			twett = '<tr class="hide"><td><a href="#" class="action-get-info-user" data="'+data.id+'">'+data.user+'</a></td><td>'+data.text+'</td><td>'+data.date+'</td></tr>';
 		    selection = '#'+id +' > table.table > tbody:last';
 		    //console.log(selection);
-	 		jQuery(selection).prepend(twett);	
+	 		jQuery(selection).prepend(twett);
 
 		});
 
 	});
+
+	socket.on('result_users', function (data) {
+ 		myApp.hideModal();
+		texto ="<p>";
+	  data.forEach(function(item) {
+	  	texto+= "<li>"+item+"</li>";
+	  });
+	  texto+="</p>"
+		myApp.showModal('<h1>Lista de Seguidores</h1>',texto);
+
+	});
+
+
+
 });
 
 
@@ -30,7 +44,7 @@ function createAlert(id){
 	idDiv = "div#"+id;
 //	console.log(jQuery(id));
 	if(jQuery(idDiv+" > div.alert").length == 0 ){
-		jQuery(idDiv+" > h1").after(elementAlert);	
+		jQuery(idDiv+" > h1").after(elementAlert);
 		count_tweets[id] = 1;
 	}else{
 		count_tweets[id]++;
@@ -54,15 +68,18 @@ function loadPageWithTweets(){
 			var id = $(n).attr('id');
 			//var parameters = { term: id };
 			if(id != undefined) {
+					myApp.showModal();
+
 				 $.get( '/admin/load/'+id,{}, function(data) {
 				 	//console.log(data);
 			       //element.html(data);
 			       $(data).each(function(i,n){
-			       		twett = '<tr><td>'+n.user+'</td><td>'+n.text+'</td><td>'+n.date+'</td></tr>';
-				    	selection = '#'+id +' > table.table > tbody:last';		
-			 			jQuery(selection).append(twett);	
+			       		twett = '<tr><td><a href="#" class="action-get-info-user" data="'+n.id+'">'+n.user+'</a></td><td>'+n.text+'</td><td>'+n.date+'</td></tr>';
+				    	selection = '#'+id +' > table.table > tbody:last';
+			 			jQuery(selection).append(twett);
 			       });
-			       jQuery('#'+id).addClass("load");
+			      jQuery('#'+id).addClass("load");
+						myApp.hideModal();
 
 				});
 			}

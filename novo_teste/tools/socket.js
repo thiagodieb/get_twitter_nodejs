@@ -13,11 +13,22 @@ socket_io.sockets.on('connection', function (socket) {
 
  	});
 
+  socket.on('pull_info_user', function (data) {
+    console.log("get_info:   "+socket.id + " - " + socket.handshake.headers['user-agent']);
+      socket_io.sockets.emit('users', data);
+
+  });
+  socket.on('push_info_user', function (data) {
+    console.log("get_info:   "+socket.id + " - " + socket.handshake.headers['user-agent']);
+      socket_io.sockets.emit('result_users', data);
+
+  });
+
  	socket.on('disconnect', function () {
  		console.log('User disconnected!  -  ' + socket.id + " - " + socket.handshake.headers['user-agent']);
 	});
 
 });
- 
+
 
 module.exports = socket_io;

@@ -1,5 +1,10 @@
+
+
 jQuery(document).ready(function(){
- 
+
+	var socket = io.connect("http://localhost:3100");
+
+
  	jQuery("ul.nav.nav-tabs > li:first").addClass("active");
  	jQuery("div.tab-pane:first").addClass("active");
 	//console.log(twet);
@@ -8,7 +13,7 @@ jQuery(document).ready(function(){
 		var type = jQuery("table.table").attr("id");
 		var value = jQuery(this).attr("value");
 		console.log(value);
-		var action 
+		var action
 		if(jQuery(this).hasClass("click_edit")){
 			action = '/admin/'+type+'/edit/'+value;
 		}else if(jQuery(this).hasClass("click_remove")){
@@ -27,4 +32,12 @@ jQuery(document).ready(function(){
 		jQuery("a.action.click_remove").click();
 	});
 
+
+	jQuery( document ).on( "click", "a.action-get-info-user", function() {
+	  	var id = parseInt(jQuery(this).attr("data"));
+			myApp.showModal();
+			socket.emit('pull_info_user', {user:id,type:'followers'});
+	});
+
 });
+
