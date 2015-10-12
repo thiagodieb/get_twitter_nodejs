@@ -1,10 +1,8 @@
 var connection = require('./connection');
 var Schema = connection.Schema, ObjectId = Schema.ObjectId;
 
-var track = new Schema({
+var users_twitter = new Schema({
   _id: ObjectId,
-  term: String,
-  status: Boolean,
 });
 
 track.pre('validate', function (next) {
@@ -15,4 +13,4 @@ track.pre('validate', function (next) {
   next();
 })
 
-module.exports = connection.model('tracks', track);
+module.exports = connection.model('users_twitter', track);

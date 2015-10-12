@@ -20,12 +20,18 @@ jQuery(document).ready(function(){
 
 	socket.on('result_users', function (data) {
  		myApp.hideModal();
-		texto ="<p>";
-	  data.forEach(function(item) {
-	  	texto+= "<li>"+item+"</li>";
-	  });
-	  texto+="</p>"
-		myApp.showModal('<h1>Lista de Seguidores</h1>',texto);
+
+		texto ="<div>";
+		Object.keys(data).forEach(function(key) {
+		    texto+= "<p>"+key+"</p><ul>";
+	  			data[key].forEach(function(value,k) {
+	  				texto+= "<li>"+value+"</li>";
+	  			});
+				texto+="</ul>";
+		});
+	  texto+="</div>";
+
+		myApp.showModal('<h1>Detalhes do Usuário</h1>',texto);
 
 	});
 
