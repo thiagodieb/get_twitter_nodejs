@@ -27,7 +27,7 @@ https://docs.npmjs.com/cli/install
 > db.createCollection('tracks');
 > db.tracks.insert({term:'STRING_DO_TERMO',status:true});
 > db.createCollection('documents');
-> db.createCollection('users_twitter');
+> db.createCollection('users_twitters');
 > db.createCollection('users');
 > db.users.insert({user:'admin',pass:'fc8335cd8e81c9d44fc78dea92eeaf4e','Administrator',email:'admin@admin.com',status:true});
 

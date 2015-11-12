@@ -1,0 +1,58 @@
+extends layout_admin
+block content_admin
+  h3 Users Twitter
+  hr
+  div.tab-content
+    div
+      form.form-horizontal(method="post", id="loginForm" action="/admin/users_twitter/save")
+        if msg
+          div.alert.alert-info
+            button(class="close" data-dismiss="alert") &times;
+            a(class="display_tweets") #{msg}
+        div.control-group
+          label.control-label Term name
+          div.controls
+            input.span3(id="term", type="text", name="term", placeholder="Enter term name" value="#{user.name}")
+            input(type="hidden" id="_id" name="_id" value="#{user._id}")
+        div.control-group
+          label.control-label Status
+          div.controls
+
+        div.control-group
+          div.controls
+            button.btn(type="submit", value="Submit") Submit
+    hr
+    div.tab-pane
+      table.table.table-striped(id="users_twitter")
+        thead
+          tr
+            th Action
+            th Id User
+            th Username
+            th Name
+            th Count Following
+            th Count Followers
+        tbody
+          for item in users
+            tr
+              td
+                a.action.click_edit(value="#{item._id}")
+                  i.icon-pencil
+                a.action(value="#{item._id}" class="hide click_remove")
+                a.action(href="#modal" role="button" data-toggle="modal" value="#{item._id}")
+                  i.icon-remove
+
+              td=item.id_user
+              td
+                a.action(href="http://twitter.com#{item.link}")
+                  i=item.username
+              td=item.name
+              td=item.following.number
+              td=item.followers.number
+
+    div(id="modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+      div.modal-body
+        p You want to delete ?
+      div.modal-footer
+        a.btn.btn-close(href="#") Cancel
+        a.btn.btn-primary(href="#") Delete

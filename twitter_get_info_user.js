@@ -167,7 +167,7 @@ function send_return_frontend(){
 function save_db(){
 
   if(MongoConnection != null){
-    MongoConnection.collection('users_twitter').save(db_result, function(err, res) {
+    MongoConnection.collection('users_twitters').save(db_result, function(err, res) {
         assert.equal(err, null);
         console.log(res);
         db_result = {};
@@ -178,7 +178,7 @@ function save_db(){
 
 function check_user_db(id){
 
-  MongoConnection.collection('users_twitter', function(err, collection) {
+  MongoConnection.collection('users_twitters', function(err, collection) {
         collection.findOne({'id_user':id}, function(err, item) {
             if(item == null){
               console.log("Nenhum resultado no banco");
