@@ -1,0 +1,1 @@
+{ "options" : { "create" : "tracks" }, "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "collector.tracks", "name" : "_id_" } ] }

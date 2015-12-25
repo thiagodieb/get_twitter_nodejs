@@ -1,0 +1,1 @@
+{ "options" : { "create" : "users_twitters" }, "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "collector.users_twitters", "name" : "_id_" } ] }
