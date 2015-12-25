@@ -3,7 +3,7 @@ jQuery(document).ready(function(){
 	loadPageWithTweets();
 
 	var socket = io.connect("http://localhost:3100");
-
+	if(socket){
 	socket.on('twetts', function (data) {
 
 		jQuery(data.terms).each(function(i,n){
@@ -35,7 +35,7 @@ jQuery(document).ready(function(){
 
 	});
 
-
+	}
 
 });
 
