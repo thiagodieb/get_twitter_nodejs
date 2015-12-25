@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('novo_teste:server');
+var debug = require('debug')('admin:server');
 var http = require('http');
 
 /**

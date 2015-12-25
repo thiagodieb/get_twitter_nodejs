@@ -22,8 +22,7 @@ https://docs.npmjs.com/cli/install
 ***Init Database***
 
 > mongo
-> use DATABASE teste;
-> use teste;
+> use collector;
 > db.createCollection('tracks');
 > db.tracks.insert({term:'STRING_DO_TERMO',status:true});
 > db.createCollection('documents');
@@ -35,17 +34,16 @@ https://docs.npmjs.com/cli/install
 ***Install Package***
 > cd twitter_nodejs
 
-#application configuration - Get Terms of Twiiter
-> npm install twitter
-> npm install socket.io-client
-> npm install mongodb
-> npm install cheerio
-
-# application configuration - Administration Terms
-> cd novo_teste
+#application configuration - Routines
+> cd routines
 > npm install
-> npm start
-- open in browser localhost:3000
+
+# application configuration - Administration 
+> cd admin
+> npm install
+> pm2 start bin/www
+- open in browser IP:3000
+
 
 
 ***Rum background application ***
